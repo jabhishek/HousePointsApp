@@ -1,10 +1,11 @@
 'use strict';
+var localEnv = require('../local.env');
 
 // Test specific configuration
 // ===========================
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/tempproject-test'
+    uri: localEnv.mongoLabUri
   }
 };

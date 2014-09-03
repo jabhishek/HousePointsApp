@@ -1,4 +1,5 @@
 'use strict';
+var localEnv = require('../local.env');
 
 // Production specific configuration
 // =================================
@@ -18,6 +19,6 @@ module.exports = {
     uri:    process.env.MONGOLAB_URI ||
             process.env.MONGOHQ_URL ||
             process.env.OPENSHIFT_MONGODB_DB_URL+process.env.OPENSHIFT_APP_NAME ||
-            'mongodb://localhost/tempproject'
+            localEnv.mongoLabUri
   }
 };
