@@ -1,15 +1,19 @@
-'use strict';
+(function (app) {
 
-angular.module('housePointApp')
-  .controller('NavbarCtrl', function ($scope, $location) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    }];
+    'use strict';
 
-    $scope.isCollapsed = true;
+    app.controller('NavbarCtrl', function ($scope, $location) {
+        $scope.menu = [
+            {
+                'title': 'Home',
+                'link': '/'
+            }
+        ];
 
-    $scope.isActive = function(route) {
-      return route === $location.path();
-    };
-  });
+        $scope.isCollapsed = true;
+
+        $scope.isActive = function (route) {
+            return route === $location.path();
+        };
+    });
+})(angular.module('housePointApp'));

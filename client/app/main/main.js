@@ -1,11 +1,13 @@
-'use strict';
+(function (app) {
 
-angular.module('housePointApp')
-  .config(function ($stateProvider) {
-    $stateProvider
-      .state('main', {
-        url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
-      });
-  });
+    'use strict';
+
+    app.config(function ($stateProvider) {
+        $stateProvider
+            .state('main', {
+                url: '/',
+                templateUrl: 'app/main/main.html',
+                controller: 'MainCtrl'
+            });
+    });
+})(angular.module('housePointApp'));

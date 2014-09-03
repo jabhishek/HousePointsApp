@@ -1,15 +1,18 @@
-'use strict';
+(function () {
 
-angular.module('housePointApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ui.router',
-  'ui.bootstrap'
-])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-    $urlRouterProvider
-      .otherwise('/');
+    'use strict';
 
-    $locationProvider.html5Mode(true);
-  });
+    angular.module('housePointApp', [
+        'ngCookies',
+        'ngResource',
+        'ngSanitize',
+        'ui.router',
+        'ui.bootstrap'
+    ])
+        .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+            $urlRouterProvider
+                .otherwise('/');
+
+            $locationProvider.html5Mode(true);
+        });
+})();

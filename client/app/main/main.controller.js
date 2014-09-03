@@ -1,11 +1,13 @@
-'use strict';
+(function (app) {
 
-angular.module('housePointApp')
-  .controller('MainCtrl', function ($scope, $http) {
-    $scope.awesomeThings = [];
+    'use strict';
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
+    app.controller('MainCtrl', function ($scope, $http) {
+        $scope.awesomeThings = [];
+
+        $http.get('/api/things').success(function (awesomeThings) {
+            $scope.awesomeThings = awesomeThings;
+        });
+
     });
-
-  });
+})(angular.module('housePointApp'));
