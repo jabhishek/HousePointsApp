@@ -2,17 +2,18 @@
 
     'use strict';
 
-    app.controller('NavbarCtrl', function ($scope, $location) {
-        $scope.menu = [
+    app.controller('NavbarCtrl', function ($location) {
+        var vm = this;
+        this.menu = [
             {
                 'title': 'Home',
                 'link': '/'
             }
         ];
 
-        $scope.isCollapsed = true;
+        this.isCollapsed = true;
 
-        $scope.isActive = function (route) {
+        this.isActive = function (route) {
             return route === $location.path();
         };
     });

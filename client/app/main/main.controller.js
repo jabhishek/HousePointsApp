@@ -2,11 +2,12 @@
 
     'use strict';
 
-    app.controller('MainCtrl', function ($scope, $http) {
-        $scope.awesomeThings = [];
+    app.controller('MainCtrl', function ($http) {
+        var vm = this;
+        vm.awesomeThings = [];
 
         $http.get('/api/things').success(function (awesomeThings) {
-            $scope.awesomeThings = awesomeThings;
+            vm.awesomeThings = awesomeThings;
         });
 
     });
