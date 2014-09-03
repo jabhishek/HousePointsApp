@@ -1,6 +1,24 @@
-/**
- * Created by ajain on 03/09/2014.
- */
-var config = require('../config/environment');
-console.log(config.mongo.uri);
+(function (database) {
+    'use strict';
+    var uri = require('../config/environment').mongo.uri;
+    var mongoDb = require('mongodb');
+    var theDb = null;
+    database.getDb = function(next) {
+        if (!theDb) {
+            mongoDb.MongoClient.connect(uri, function(err, db) {
+                if (err) {
+                    next(err);
+                } else {
+                    theDb = {
+                        db: db
+                    };
+                    next(null, theDb);
+                }
+            })
+        } else {
+            next(null, theDb);
+        }
 
+    };
+
+})(module.exports);
