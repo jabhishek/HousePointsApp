@@ -6,6 +6,6 @@ var localEnv = require('../local.env');
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: localEnv.mongoLabUri
+    uri: localEnv.mongo.testUri
   }
 };
