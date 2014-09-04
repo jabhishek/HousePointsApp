@@ -10,7 +10,8 @@
                     next(err);
                 } else {
                     theDb = {
-                        db: db
+                        db: db,
+                        users: db.collection("users")
                     };
                     next(null, theDb);
                 }
