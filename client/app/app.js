@@ -6,13 +6,11 @@
         'ngCookies',
         'ngResource',
         'ngSanitize',
-        'ui.router',
-        'ui.bootstrap'
-    ])
-        .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-            $urlRouterProvider
-                .otherwise('/');
+        'ui.router'
+    ]).config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+        $urlRouterProvider
+            .otherwise('/');
 
-            $locationProvider.html5Mode(true);
-        });
+        $locationProvider.html5Mode(true);
+    });
 })();

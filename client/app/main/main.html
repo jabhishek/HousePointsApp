@@ -1,31 +1,16 @@
-<!--<div ng-include="'components/navbar/navbar.html'"></div>-->
+<section class="login-section">
+    <h1>Lorem ipsum.</h1>
 
-<!--
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
--->
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vitae.</p>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in mainVm.awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+    <form class="form login-form" novalidate id="loginform" name="loginform" ng-submit="vm.login(loginform)">
+        {{loginform.email.$error}}
+        <h2>Login</h2>
+        <fieldset>
+            <input type="email" id="email" name="email" placeholder="Email" ng-required ng-model="vm.user.email"/>
+            <input type="password" id="password" name="password" placeholder="Password" ng-required ng-model="vm.user.password"/>
+            <input type="submit" class="button"/>
+        </fieldset>
+    </form>
 
-<!--
-<footer class="footer">
-  <div class="container">
-      <p><a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-  </div>
-</footer>
--->
+</section>

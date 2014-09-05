@@ -1,24 +1,64 @@
 @import 'globals/lesshat.less';
+@import 'globals/variables.less';
 @import 'globals/mixins.less';
 @import 'globals/reset.less';
 @import 'font-awesome/less/font-awesome.less';
 
-
-
 @fa-font-path: '/bower_components/font-awesome/fonts';
 
+.visible-desktop {
+    display: none;
+    @media screen and (min-width: 960px) {
+        display: inline-block;
+    }
+}
 
+.visible-tablet {
+    display: none;
+    @media screen and (min-width: 768px) {
+        display: inline-block;
+    }
+}
+
+.visible-mobile {
+    display: inline-block;
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
+}
 
 /**
  * App-wide Styles
  */
 html {
-    font-family: Raleway, Tahoma, Helvetica, sans-serif;
-    font-size: 62.5%;
+    font-family: @font-family;
+    background-color: @page-background;
+    color: #555;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 60%;
+
+    @media screen and (min-width: 960px) {
+        display: inline-block;
+        font-size: 62.5%;
+    }
 }
- a{
-     color: #3333ff;
- }
+
+input {
+    font-family: @font-family;
+}
+
+a {
+    color: @link-colour;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
 .view {
     .font-size(1.5);
     margin: 0 auto;
@@ -33,6 +73,7 @@ html {
         max-width: 930px;
     }
 }
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;

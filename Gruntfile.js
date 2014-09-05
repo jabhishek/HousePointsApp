@@ -72,6 +72,7 @@ module.exports = function (grunt) {
       },
       jsTest: {
         files: [
+          '<%= yeoman.client %>/{app,components}/**/*.js',
           '<%= yeoman.client %>/{app,components}/**/*.spec.js',
           '<%= yeoman.client %>/{app,components}/**/*.mock.js'
         ],
@@ -370,10 +371,10 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'less',
+        'less'
       ],
       test: [
-        'less',
+        'less'
       ],
       debug: {
         tasks: [
@@ -442,7 +443,7 @@ module.exports = function (grunt) {
         files: {
           '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.less'
         }
-      },
+      }
     },
 
     injector: {
@@ -507,7 +508,7 @@ module.exports = function (grunt) {
           ]
         }
       }
-    },
+    }
   });
 
   // Used for delaying livereload until after server has restarted
@@ -581,7 +582,7 @@ module.exports = function (grunt) {
         'concurrent:test',
         'injector',
         'autoprefixer',
-        'karma'
+        'karma', 'watch'
       ]);
     }
 

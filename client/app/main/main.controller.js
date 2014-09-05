@@ -2,13 +2,10 @@
 
     'use strict';
 
-    app.controller('MainCtrl', function ($http) {
+    app.controller('MainCtrl', function () {
         var vm = this;
-        vm.awesomeThings = [];
-
-        $http.get('/api/things').success(function (awesomeThings) {
-            vm.awesomeThings = awesomeThings;
-        });
-
+        vm.user = {
+            email: '', password: ''
+        };
     });
 })(angular.module('housePointApp'));
