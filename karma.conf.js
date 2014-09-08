@@ -20,15 +20,14 @@ module.exports = function(config) {
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/app/app.js',
       'client/app/**/*.js',
+      'client/tests/**/*.js',
       'client/components/**/*.js',
       'client/app/**/*.html',
       'client/components/**/*.html'
     ],
 
     preprocessors: {
-      '**/*.jade': 'ng-jade2js',
-      '**/*.html': 'html2js',
-      '**/*.coffee': 'coffee'
+      'client/app/**/*.js': 'coverage'
     },
 
     ngHtml2JsPreprocessor: {
@@ -42,6 +41,12 @@ module.exports = function(config) {
     // list of files / patterns to exclude
     exclude: [],
 
+    reporters: ['progress', 'coverage'],
+
+    coverageReporter: {
+        type : 'html',
+        dir : 'coverage/'
+    },
     // web server port
     port: 8080,
 
@@ -51,7 +56,7 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
 
     // Start these browsers, currently available:
