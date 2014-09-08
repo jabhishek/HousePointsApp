@@ -6,7 +6,7 @@ describe('module: app', function () {
     var module;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($controller) {
+    beforeEach(inject(function () {
         module = angular.module('housePointApp');
     }));
 
@@ -49,14 +49,18 @@ describe('module: app', function () {
 
 
 describe('routes', function () {
-    var location, route;
+    var location, state;
     beforeEach(module('housePointApp'));
-    beforeEach(inject(function(_$location_, _$route_) {
+    beforeEach(inject(function(_$location_, _$state_) {
         location = _$location_;
-        route = _$route_;
+        state = _$state_;
     }));
 
-    it("should load the index page on successful load of /", function() {
+    it("should go to the / on state change to main", function() {
+        expect(state.href('main')).toEqual('/');
+    });
 
+    it("should go to the /login on state change to login", function() {
+        expect(state.href('login')).toEqual('/login');
     });
 });
