@@ -17,6 +17,11 @@ describe('Controller: LoginCtrl', function () {
         LoginCtrl = $controller('LoginCtrl');
     }));
 
+    it('email and password to be defined', function () {
+        expect(LoginCtrl.user.email).toBeDefined();
+        expect(LoginCtrl.user.password).toBeDefined();
+    });
+
     it('should initialize the user ID and password correctly', function () {
         expect(LoginCtrl.user.email).toBe("");
         expect(LoginCtrl.user.password).toBe("");
