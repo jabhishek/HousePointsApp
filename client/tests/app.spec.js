@@ -80,7 +80,7 @@ describe(' routes - user logged in', function () {
 });
 
 describe(' routes - user not logged in', function () {
-    var state, auth, $rootScope;
+    var state, auth, $rootScope, $timeout;
     beforeEach(module('housePointApp', function ($provide) {
         return $provide.decorator('auth', function () {
             return {
@@ -89,9 +89,10 @@ describe(' routes - user not logged in', function () {
         });
     }));
 
-    beforeEach(inject(function (_$state_, _$rootScope_, $templateCache) {
+    beforeEach(inject(function (_$state_, _$rootScope_, $templateCache, _$timeout_) {
         state = _$state_;
         $rootScope = _$rootScope_;
+        $timeout = _$timeout_;
         $templateCache.put('app/main/main.html', '');
         $templateCache.put('app/login/login.html', '');
     }));
@@ -99,12 +100,17 @@ describe(' routes - user not logged in', function () {
     it("should go to /login if state is changed to an invalid state", function () {
         state.go('invalidstate');
         $rootScope.$digest();
-        expect(state.current.name).toBe('login');
+        $timeout(function() {
+            expect(state.current.name).toBe('login');
+        }, 1);
+
     });
 
     it(" - should go to /login if state is changed to main", function () {
         state.go('main');
         $rootScope.$digest();
-        expect(state.current.name).toBe('login');
+        $timeout(function() {
+            expect(state.current.name).toBe('login');
+        }, 1);
     });
 });
