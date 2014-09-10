@@ -1,14 +1,21 @@
-'use strict';
+(function (app) {
+    'use strict';
+    app.factory('auth', auth);
 
-angular.module('housePointApp')
-    .factory('auth', function () {
-        // Service logic
-        // ...
-
+    auth.$inject = [];
+    function auth() {
         var isLoggedIn = false;
 
         // Public API here
         return {
-            isLoggedIn: isLoggedIn
+            isLoggedIn: isLoggedIn,
+            login: login
         };
-    });
+
+        function login() {
+
+        }
+    }
+})(angular.module('housePointApp'));
+
+

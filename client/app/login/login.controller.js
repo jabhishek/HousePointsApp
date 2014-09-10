@@ -2,7 +2,12 @@
 
     'use strict';
 
-    app.controller('LoginCtrl', function () {
+    app.controller('LoginCtrl', loginController);
+
+    loginController.$inject = [];
+
+    function loginController () {
+        /*jshint validthis: true */
         var vm = this;
         vm.isFormSubmitted = false;
         vm.user = {
@@ -19,5 +24,7 @@
         function login() {
             vm.isFormSubmitted = true;
         }
-    });
+    }
+
+
 })(angular.module('housePointApp'));

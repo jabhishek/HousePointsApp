@@ -1,9 +1,12 @@
 (function (app) {
     'use strict';
 
-    app.controller('MainCtrl', function () {
-            this.message = 'World!!';
-        });
+    app.controller('MainCtrl', mainController);
 
+    function mainController () {
+        /*jshint validthis: true */
+        var vm = this;
+        vm.message = 'World!!';
+    }
 })(angular.module('housePointApp'));
 
