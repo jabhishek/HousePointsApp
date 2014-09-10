@@ -10,28 +10,28 @@ describe('module: app', function () {
         module = angular.module('housePointApp');
     }));
 
-    it("should be registered", function() {
+    it("should be registered", function () {
         expect(module).not.toEqual(null);
     });
     describe('dependencies', function () {
         var deps;
-        var hasModule = function(m) {
+        var hasModule = function (m) {
             return deps.indexOf(m) > -1;
         };
-        beforeEach(function() {
+        beforeEach(function () {
             deps = module.value('housePointApp').requires;
         });
 
-        it("should have ngCookies as a dependency", function() {
+        it("should have ngCookies as a dependency", function () {
             expect(hasModule('ngCookies')).toBe(true);
         });
-        it("should have ngResource as a dependency", function() {
+        it("should have ngResource as a dependency", function () {
             expect(hasModule('ngResource')).toBe(true);
         });
-        it("should have ngSanitize as a dependency", function() {
+        it("should have ngSanitize as a dependency", function () {
             expect(hasModule('ngSanitize')).toBe(true);
         });
-        it("should have ui.router as a dependency", function() {
+        it("should have ui.router as a dependency", function () {
             expect(hasModule('ui.router')).toBe(true);
         });
 
@@ -40,43 +40,69 @@ describe('module: app', function () {
 });
 
 describe('routes', function () {
-    var location, state, auth, $rootScope;
+    var state;
     beforeEach(module('housePointApp'));
-    // TODO-abhi - Replace auth with a mocked version
-    beforeEach(inject(function(_$location_, _$state_, _auth_, _$rootScope_, $templateCache) {
-        location = _$location_;
+    beforeEach(inject(function (_$state_) {
         state = _$state_;
-        auth = _auth_;
+    }));
+
+    it("should go to / if state is changed to main", function () {
+        expect(state.href('main')).toEqual('/');
+    });
+
+    it("should go to /login if state is changed to login", function () {
+        expect(state.href('login')).toEqual('/login');
+    });
+});
+
+describe(' routes - user logged in', function () {
+    var state, $rootScope;
+    beforeEach(module('housePointApp', function ($provide) {
+        return $provide.decorator('auth', function () {
+            return {
+                isLoggedIn: true
+            }
+        });
+    }));
+
+    beforeEach(inject(function (_$state_, _$rootScope_, $templateCache) {
+        state = _$state_;
         $rootScope = _$rootScope_;
         $templateCache.put('app/main/main.html', '');
         $templateCache.put('app/login/login.html', '');
     }));
 
-    it("should go to / if state is changed to main", function() {
-        expect(state.href('main')).toEqual('/');
-    });
-
-    it("should go to /login if state is changed to login", function() {
-        expect(state.href('login')).toEqual('/login');
-    });
-
-    it("should go to the main state if state is changed to an invalid state and user is logged in", function() {
-        auth.isLoggedIn = true;
+    it("should go to the main state if state is changed to an invalid state and user is logged in", function () {
         state.go('invalidstate');
         $rootScope.$digest();
         expect(state.current.name).toBe('main');
     });
+});
 
-    it("should go to the login if state is changed to an invalid state and user is not logged in", function() {
-        auth.isLoggedIn = false;
+describe(' routes - user not logged in', function () {
+    var state, auth, $rootScope;
+    beforeEach(module('housePointApp', function ($provide) {
+        return $provide.decorator('auth', function () {
+            return {
+                isLoggedIn: false
+            }
+        });
+    }));
+
+    beforeEach(inject(function (_$state_, _$rootScope_, $templateCache) {
+        state = _$state_;
+        $rootScope = _$rootScope_;
+        $templateCache.put('app/main/main.html', '');
+        $templateCache.put('app/login/login.html', '');
+    }));
+
+    it("should go to /login if state is changed to an invalid state", function () {
         state.go('invalidstate');
         $rootScope.$digest();
         expect(state.current.name).toBe('login');
     });
 
-    it("should go to the /login if user not logged in and state is changed to main", function() {
-        console.log("should go to the /login if user not logged in and state is changed to main")
-        auth.isLoggedIn = false;
+    it(" - should go to /login if state is changed to main", function () {
         state.go('main');
         $rootScope.$digest();
         expect(state.current.name).toBe('login');
