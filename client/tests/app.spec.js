@@ -100,17 +100,14 @@ describe(' routes - user not logged in', function () {
     it("should go to /login if state is changed to an invalid state", function () {
         state.go('invalidstate');
         $rootScope.$digest();
-        $timeout(function() {
-            expect(state.current.name).toBe('login');
-        }, 1);
-
+        $timeout.flush();
+        expect(state.current.name).toBe('login');
     });
 
     it(" - should go to /login if state is changed to main", function () {
         state.go('main');
         $rootScope.$digest();
-        $timeout(function() {
-            expect(state.current.name).toBe('login');
-        }, 1);
+        $timeout.flush();
+        expect(state.current.name).toBe('login');
     });
 });
