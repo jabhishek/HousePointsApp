@@ -12,10 +12,15 @@
             .otherwise('/');
 
         $locationProvider.html5Mode(true);
-    }).run(function ($rootScope) {
+    }).run(function ($rootScope, $state, auth) {
         $rootScope.$on('$stateChangeStart',
             function (event, toState) {
                 console.log('$stateChangeStart to ' + toState.name);
+                if (!auth.isLoggedIn && toState.name !== 'login') {
+                    event.preventDefault();
+                    console.log('Not logged in. Original state: ' + toState.name + '. Redirecting to login.');
+                    $state.go('login');
+                }
             });
 
         $rootScope.$on('$stateNotFound',
