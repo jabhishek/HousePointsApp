@@ -56,18 +56,15 @@ describe('routes', function () {
 });
 
 describe(' routes - user logged in', function () {
-    var state, $rootScope;
+    var state, $rootScope, $timeout;
     beforeEach(module('housePointApp', function ($provide) {
-        return $provide.decorator('auth', function () {
-            return {
-                isLoggedIn: true
-            }
-        });
+        return getAuthMock($provide, true);
     }));
 
-    beforeEach(inject(function (_$state_, _$rootScope_, $templateCache) {
+    beforeEach(inject(function (_$state_, _$rootScope_, $templateCache, _$timeout_) {
         state = _$state_;
         $rootScope = _$rootScope_;
+        $timeout = _$timeout_;
         $templateCache.put('app/main/main.html', '');
         $templateCache.put('app/login/login.html', '');
     }));
@@ -80,13 +77,10 @@ describe(' routes - user logged in', function () {
 });
 
 describe(' routes - user not logged in', function () {
-    var state, auth, $rootScope, $timeout;
+    var state, $rootScope, $timeout;
+
     beforeEach(module('housePointApp', function ($provide) {
-        return $provide.decorator('auth', function () {
-            return {
-                isLoggedIn: false
-            }
-        });
+        return getAuthMock($provide, false);
     }));
 
     beforeEach(inject(function (_$state_, _$rootScope_, $templateCache, _$timeout_) {
@@ -111,3 +105,17 @@ describe(' routes - user not logged in', function () {
         expect(state.current.name).toBe('login');
     });
 });
+
+function getAuthMock($provide, _isLoggedIn) {
+    return $provide.decorator('auth', function ($delegate) {
+        var isLoggedIn = $delegate.isLoggedIn;
+        if (angular.isFunction(isLoggedIn)) {
+            isLoggedIn = function () {
+                return _isLoggedIn;
+            }
+        }
+        return {
+            isLoggedIn: isLoggedIn
+        }
+    });
+}

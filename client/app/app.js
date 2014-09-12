@@ -16,7 +16,7 @@
         $rootScope.$on('$stateChangeStart',
             function (event, toState) {
                 console.log('$stateChangeStart to ' + toState.name);
-                if (!auth.isLoggedIn && toState.name !== 'login') {
+                if (!auth.isLoggedIn() && toState.name !== 'login') {
                     console.log('Not logged in. Original state: ' + toState.name + '. Redirecting to login.');
                     $timeout(function() {
                         event.preventDefault();

@@ -4,7 +4,7 @@
 
     auth.$inject = [];
     function auth() {
-        var isLoggedIn = false;
+        var _isLoggedIn = false;
 
         // Public API here
         return {
@@ -14,6 +14,10 @@
 
         function login() {
 
+        }
+
+        function isLoggedIn() {
+            return _isLoggedIn;
         }
     }
 })(angular.module('housePointApp'));
