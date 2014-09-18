@@ -13,7 +13,7 @@ describe('GET /api/users', function() {
       .expect('Content-Type', /json/)
       .end(function(err, res) {
         if (err) return done(err);
-        res.body.data.should.be.instanceof(Array);
+        res.body.users.should.be.instanceof(Array);
         done();
       });
   });

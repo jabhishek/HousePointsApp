@@ -6,12 +6,11 @@
 
 // Get list of users
     users.index = function (req, res) {
-        data.users.get(function processResults(err, results) {
+        data.users.getAll(function processResults(err, results) {
             res.json({
                 err: err,
-                data: results
+                users: results
             });
         });
-
     };
 })(module.exports);

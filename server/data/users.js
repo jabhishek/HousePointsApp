@@ -5,7 +5,7 @@
     "use strict";
     var database = require("./database");
 
-    users.get = function (next) {
+    users.getAll = function (next) {
         database.getDb(function getDbBack (err, theDb) {
             if (err) {
                 next(err);
@@ -17,6 +17,26 @@
                         next(null, results);
                     }
                 });
+            }
+        });
+    };
+
+    users.add = function (user, next) {
+        database.getDb(function getDbBack (err, theDb) {
+            if (err) {
+                next(err);
+            } else {
+                theDb.users.insert(user, next);
+            }
+        });
+    };
+
+    users.remove = function (user, next) {
+        database.getDb(function getDbBack (err, theDb) {
+            if (err) {
+                next(err);
+            } else {
+                theDb.users.remove(user, next);
             }
         });
     };
