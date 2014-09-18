@@ -7,12 +7,10 @@ var data = require('../../data');
 var hasher = require('./hasher');
 
 describe('POST /auth', function () {
-    var salt = hasher.createSalt(12);
+    var salt = hasher.createSalt(8);
     before(function (done) {
         data.users.remove({}, function (err) {
-            if (!err)
-                console.log("users removed");
-            else
+            if (err)
                 console.log(err);
             done();
         });
@@ -26,11 +24,9 @@ describe('POST /auth', function () {
             role: 'user',
             name: 'test user',
             salt: salt,
-            password: hasher.computeHash("abc", salt)
+            hashedPassword: hasher.computeHash("abc", salt)
         }, function (err) {
-            if (!err)
-                console.log("user added");
-            else
+            if (err)
                 console.log(err);
             done();
         });
@@ -38,28 +34,44 @@ describe('POST /auth', function () {
 
     afterEach(function (done) {
         data.users.remove({email: 'a@a.com'}, function (err) {
-            if (!err)
-                console.log("user added");
-            else
+            if (err)
                 console.log(err);
             done();
         });
     });
 
-    it('should respond with JSON array', function (done) {
+    it('should respond with no error if correct credentials provided', function (done) {
         request(app)
             .post('/auth/local')
             .send(
             {
-                user: {
                     email: "a@a.com",
-                    role: "admin"
-                }
+                    password: "abc"
             })
             .expect(200)
             .expect('Content-Type', /json/)
             .end(function (err, res) {
                 if (err) {
+                    console.log(err);
+                    return done(err);
+                }
+                res.body.should.be.instanceof(Object);
+                done();
+            });
+    });
+    it('should respond with 401 if incorrect credentials provided', function (done) {
+        request(app)
+            .post('/auth/local')
+            .send(
+            {
+                    email: "a@a.com",
+                    password: "xyz"
+            })
+            .expect(401)
+            .expect('Content-Type', /json/)
+            .end(function (err, res) {
+                if (err) {
+                    console.log(err);
                     return done(err);
                 }
                 res.body.should.be.instanceof(Object);

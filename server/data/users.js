@@ -41,4 +41,14 @@
         });
     };
 
+    users.get = function (email, next) {
+        database.getDb(function getDbBack (err, theDb) {
+            if (err) {
+                next(err);
+            } else {
+                theDb.users.findOne({email: email}, next);
+            }
+        });
+    };
+
 })(module.exports);
