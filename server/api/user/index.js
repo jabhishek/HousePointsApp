@@ -7,4 +7,7 @@ var router = express.Router();
 
 router.get('/', controller.index);
 
+router.get('/:id', controller.getById);
+
+
 module.exports = router;

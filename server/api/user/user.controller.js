@@ -13,4 +13,22 @@
             });
         });
     };
+
+    users.getByEmail = function (req, res) {
+        var email = req.params.email;
+        data.users.getByEmail(email, function processResults(err, results) {
+            res.json({
+                err: err,
+                user: results
+            });
+        });
+    };
+
+    users.getById = function (req, res) {
+        console.log(req.params);
+        var id = req.params.id;
+            res.json({
+                user: id
+            });
+    };
 })(module.exports);
